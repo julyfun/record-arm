@@ -13,7 +13,8 @@ def get_topic_and_type():
     for topic in all:
         name = topic[0]
         type_str = topic[1].split('/')[-1]
-        if type_str in ("JointControllerState", "JointState", "JointTrajectoryControllerState", "TFMessage", "CameraInfo", ""):
+        # if type_str in ("JointControllerState", "JointState", "JointTrajectoryControllerState", "TFMessage", "CameraInfo", ""):
+        if type_str in ("", "", "", "TFMessage", ""):
             subs_name_type.append((name, eval(type_str)))
 
     # this two trajectory is sometimes missing when running the arm (but rviz is ok, so I removed them)
@@ -23,8 +24,11 @@ def get_topic_and_type():
     # subs_name_type.append(('/k4a/depth_registered/points', PointCloud2))
     # subs_name_type.append(('/k4a/rgb/image_raw/compressed', CompressedImage))
     # subs_name_type.append(('/k4a/depth/image_rect/compressed', CompressedImage))
+
     subs_name_type.append(('/k4a/depth/image_raw/compressed', CompressedImage))
     subs_name_type.append(('/k4a/rgb_to_depth/image_raw/compressed', CompressedImage))
+    subs_name_type.append(('/k4a/depth/camera_info', CameraInfo))
+    subs_name_type.append(('/k4a/rgb_to_depth/camera_info', CameraInfo))
 
     # certainly not needed
     # subs_name_type.append(('/k4a/imu', Imu))
